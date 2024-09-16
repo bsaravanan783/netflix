@@ -1,18 +1,20 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import {signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,} from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-
+import { BACKGROUND_IMG, PHOTO_URL, USER_ICON } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
 
   const name = useRef(null);
   const email = useRef(null);
@@ -34,38 +36,35 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
 
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL:
-              "https://m.media-amazon.com/images/I/71YFrvK4w9L._SX679_.jpg",
+            photoURL: USER_ICON,
           })
             .then(() => {
               // Profile updated!
-              // ...
 
-            //   const {uid,email,displayName,photoURL} = user;  here user is not updated yet 
-              const {uid,email,displayName,photoURL} = auth.currentUser;
+              //   const {uid,email,displayName,photoURL} = user;  here user is not updated yet
+              const { uid, email, displayName, photoURL } = auth.currentUser;
 
-
-              dispatch(addUser({uid: uid, email: email, displayName: displayName,photoURL:photoURL}));
-              
-              navigate("/browse");
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
             })
             .catch((error) => {
               // An error occurred
-              // ...
               setErrorMessage(error.message);
             });
-
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + "-" + errorMessage);
-          // ..
         });
     } else {
       signInWithEmailAndPassword(
@@ -76,9 +75,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -95,7 +91,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/85ff76db-39e5-423a-afbc-97d3e74db71b/null/IN-en-20240909-TRIFECTA-perspective_b22117e0-4610-4d57-a695-20f77d241a4a_small.jpg"
+          src={BACKGROUND_IMG}
           alt="logo"
         />
       </div>

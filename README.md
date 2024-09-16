@@ -19,6 +19,27 @@ signup form
  update profile
  fetch from tmdb movies
 
+ bug fix : sign up user  display and profile picture update
+ bug fix : if the user is not logged in redirect to login page and vice versa
+
+ unscribing onauthstate change
+
+ added hardCoded values to constants file
+ regidter for tmdb api  and  create an app & get access token
+ get data from now playing movies list
+
+ custom hook for nowplaying movies 
+ update store with movie data 
+ plan for main and secondary container
+ fetch data for trailer video
+ update store with trailer video data
+
+ embedded the youtube video and made it autoplay and mute
+ tailwind classes to  make main container look awesome 
+ 
+ 
+
+
 
 # features
 login /signup
