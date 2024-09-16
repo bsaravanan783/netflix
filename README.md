@@ -36,7 +36,19 @@ signup form
 
  embedded the youtube video and made it autoplay and mute
  tailwind classes to  make main container look awesome 
+
+
+ build secondary component 
+ build movie list 
+ build movie card 
+ TMDB image cdn url
+
+ browse page with tailwind css
+ usepopular , use upcoming movies custom hook
+
+
  
+
  
 
 
