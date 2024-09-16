@@ -5,10 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useEffect } from "react";
-import { LOGO } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { toggleAiSearchView } from "../utils/aiSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
+  const aiSearchView = useSelector((store) => store.ai.showAiSearch);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,15 +54,43 @@ const Header = () => {
         navigate("/error");
       });
   };
+
+  const handleAiSearch = () => {
+    //toggle ai search
+
+    dispatch(toggleAiSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between">
-      <img
-        className="w-44"
-        src= {LOGO}
-        alt="logo"
-      />
+      <img className="w-44" src={LOGO} alt="logo" />
       {user && (
         <div className="flex p-3">
+          {aiSearchView && (
+            <select
+              className="p-2 m-2 bg-gray-900 text-white rounded-md "
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((language, index) => {
+                return (
+                  <option key={index} value={language.identifier}>
+                    {language.name}
+                  </option>
+                );
+              })}
+            </select>
+          )}
+
+          <button
+            className="text-white px-4 py-2 mx-6 bg-purple-800 rounded-md"
+            onClick={handleAiSearch}
+          >
+            {!aiSearchView?"AI search":"Home Page"}
+          </button>
           <img
             className="w-12 h-12"
             alt="usericon"

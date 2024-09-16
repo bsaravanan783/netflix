@@ -46,8 +46,16 @@ signup form
  browse page with tailwind css
  usepopular , use upcoming movies custom hook
 
+ ai search page
+ ai search bar
+ multi language feature
 
- 
+ integrate gpt apis (get open ai key)
+
+
+GPT SEARCH feature 
+
+
 
  
 

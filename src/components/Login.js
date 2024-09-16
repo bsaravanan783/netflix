@@ -22,7 +22,6 @@ const Login = () => {
   const handleButtonClick = () => {
     // form validation
     const message = checkValidData(email.current.value, password.current.value);
-    console.log(message, "validate message");
     setErrorMessage(message);
     if (message) return;
 
